@@ -12,6 +12,7 @@ enum DoxeInputFieldState {
     case filled
     case focused
     case error
+    case disabled
 }
 
 struct DoxeInputField: View {
@@ -30,43 +31,46 @@ struct DoxeInputField: View {
                 HStack {
                     if let leftIcon = leftIcon {
                         Image(systemName: leftIcon)
-                            .foregroundColor(iconColor)
+                            .foregroundColor(.gray)
                             .padding(.leading, 8)
                     }
 
                     VStack(alignment: .leading, spacing: -4) {
                         Text(titleLabel)
-                            .font(.custom("", size: 12))
-                            .foregroundColor(state == .error ? .red : .black)
-                            .padding(.leading, leftIcon == nil ? 8 : 8)
-                            .background(Color.white.opacity(0.8))
-                            
+                            .font(.custom("", size: 14))
+                            .foregroundColor(state == .disabled ? .gray : .black)
+                            .padding(.leading, leftIcon == nil ? 4 : 0)
+                          
 
                         ZStack(alignment: .leading) {
                             if text.isEmpty {
                                 Text(placeholder)
-                                    .font(.custom("", size: 12)) 
-                                    .foregroundColor(.gray)
-                                    .padding(.leading, leftIcon == nil ? 8 : 8)
+                                    .font(.custom("", size: 12)) // Tamanho do placeholder
+                                    .foregroundColor(state == .disabled ? .gray : .gray)
+                                    .padding(.leading, leftIcon == nil ? 4 : 0)
                             }
                             TextField("", text: $text, onEditingChanged: { isEditing in
-                                if isEditing {
-                                    self.state = .focused
-                                } else if !text.isEmpty {
-                                    self.state = .filled
-                                } else {
-                                    self.state = .normal
+                                if !isDisabled {
+                                    if isEditing {
+                                        self.state = .focused
+                                    } else if !text.isEmpty {
+                                        self.state = .filled
+                                    } else {
+                                        self.state = .normal
+                                    }
                                 }
                             })
-                            .font(.custom("", size: 12)) 
-                            .padding(EdgeInsets(top: 4, leading: 8, bottom: 8, trailing: 12))
-                            .foregroundColor(state == .error ? .red : .primary)
+                            .font(.custom("", size: 12))
+                            .padding(EdgeInsets(top: 4, leading: 0, bottom: 8, trailing: 12))
+                            .padding(.leading, leftIcon == nil ? 4 : 0)
+                            .foregroundColor(state == .disabled ? .gray : (state == .error ? .red : .primary))
+                            .disabled(isDisabled)
                         }
                     }
 
                     if let rightIcon = rightIcon {
                         Image(systemName: rightIcon)
-                            .foregroundColor(iconColor)
+                            .foregroundColor(.gray)
                             .padding(.trailing, 8)
                     }
                 }
@@ -79,7 +83,7 @@ struct DoxeInputField: View {
 
             if state != .error {
                 Text(supportingText)
-                    .font(.custom("", size: 12)) 
+                    .font(.custom("", size: 12))
                     .foregroundColor(.gray)
             }
 
@@ -103,14 +107,21 @@ struct DoxeInputField: View {
             return .blue
         case .error:
             return .red
+        case .disabled:
+            return .gray
         }
     }
 
     private var backgroundColor: Color {
-        return .white
+        switch state {
+        case .disabled:
+            return .gray.opacity(0.2)
+        default:
+            return .white
+        }
     }
-
-    private var iconColor: Color {
-        return state == .error ? .red : .gray
+    
+    private var isDisabled: Bool {
+        return state == .disabled
     }
 }

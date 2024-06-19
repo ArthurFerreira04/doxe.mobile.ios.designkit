@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var state: DoxeInputFieldState = .normal
+    @State private var state: DoxeInputFieldState = .filled
 
     var body: some View {
         VStack {
