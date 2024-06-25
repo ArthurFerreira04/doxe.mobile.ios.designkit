@@ -89,14 +89,15 @@ struct DoxeDropdown: View {
 
             if isPickerVisible {
                 VStack(alignment: .leading, spacing: 0) {
-                    ForEach(options, id: \.self) { option in
-                        Text(option)
+                    ForEach(options.indices, id: \.self) { index in
+                        Text(options[index])
                             .padding()
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .background(Color.white)
                             .border(Color.gray.opacity(0.3), width: 0.5)
+                            .cornerRadius(index == options.count - 1 ? 10 : 0, corners: [.bottomLeft, .bottomRight])
                             .onTapGesture {
-                                selectedOption = option
+                                selectedOption = options[index]
                                 isPickerVisible = false
                                 state = .selected
                             }
@@ -120,5 +121,21 @@ struct DoxeDropdown: View {
         }
         .padding()
         .disabled(state == .disabled)
+    }
+}
+
+struct RoundedCorner: Shape {
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+    
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
+    }
+}
+
+extension View {
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape(RoundedCorner(radius: radius, corners: corners))
     }
 }

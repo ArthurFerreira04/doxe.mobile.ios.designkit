@@ -11,10 +11,10 @@ struct ContentView: View {
     var body: some View {
         VStack {
             DoxeDropdown(
-                options: ["Item list 01", "Item list 02", "Item list 03"],
-                label: "Label",
-                placeholder: "Place Holder",
-                supportText: "Texto de apoio",
+                options: ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira"],
+                label: "Qual dia você pode participar?",
+                placeholder: "Dia disponivel",
+                supportText: "Escolha o dia da semana",
                 supportTextColor: .primary,
                 labelColor: .primary,
                 selectedColor: .secondary,
