@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DoxeCustomButton: View {
+public struct DoxeCustomButton: View {
     var text: String
     var iconName: String?
     var action: () -> Void
@@ -19,7 +19,7 @@ struct DoxeCustomButton: View {
     var isEnabled: Bool = true
     var isTransparent: Bool = false
 
-    var body: some View {
+    public var body: some View {
         Button(action: action) {
             HStack {
                 if let iconName = iconName {

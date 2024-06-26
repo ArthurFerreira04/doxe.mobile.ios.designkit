@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum ButtonSizeStyle {
+public enum ButtonSizeStyle {
     case large, medium, small
 
     var size: CGSize {
@@ -33,7 +33,7 @@ enum ButtonSizeStyle {
     }
 }
 
-struct DoxeButtonStyle: ButtonStyle {
+public struct DoxeButtonStyle: ButtonStyle {
     var backgroundColor: Color
     var borderColor: Color
     var textColor: Color
@@ -45,7 +45,7 @@ struct DoxeButtonStyle: ButtonStyle {
     let fixedFontSize: CGFloat = 16
     var hasIcon: Bool
 
-    func makeBody(configuration: Configuration) -> some View {
+public func makeBody(configuration: Configuration) -> some View {
         let currentBackgroundColor = !isEnabled ? Color.gray.opacity(0.2) : (isTransparent ? Color.clear : (isFilled ? backgroundColor : Color.clear))
         let currentBorderColor = !isEnabled ? Color.gray.opacity(0.0) : (isTransparent ? Color.clear : borderColor)
         let currentTextColor = !isEnabled ? Color.gray.opacity(0.5) : (isTransparent ? Color.clear : textColor)

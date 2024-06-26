@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-enum DropdownState {
+public enum DropdownState {
     case normal
     case selected
     case error
     case disabled
 }
 
-struct DoxeDropdown: View {
+public struct DoxeDropdown: View {
     @State private var selectedOption: String
     @State private var isPickerVisible: Bool = false
     @State private var state: DropdownState = .normal
@@ -30,7 +30,7 @@ struct DoxeDropdown: View {
     let icon: Image
     let iconColor: Color
 
-    init(
+    public init(
         options: [String],
         label: String = "Label",
         placeholder: String = "Place Holder",
@@ -57,7 +57,7 @@ struct DoxeDropdown: View {
         self._selectedOption = State(initialValue: placeholder)
     }
 
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
@@ -124,17 +124,17 @@ struct DoxeDropdown: View {
     }
 }
 
-struct RoundedCorner: Shape {
+public struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
     
-    func path(in rect: CGRect) -> Path {
+    public func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
     }
 }
 
-extension View {
+public extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape(RoundedCorner(radius: radius, corners: corners))
     }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum DoxeInputFieldState {
+public enum DoxeInputFieldState {
     case normal
     case filled
     case focused
@@ -15,7 +15,7 @@ enum DoxeInputFieldState {
     case disabled
 }
 
-struct DoxeInputField: View {
+public struct DoxeInputField: View {
     @State private var text: String = ""
     @Binding var state: DoxeInputFieldState
     var titleLabel: String
@@ -25,7 +25,7 @@ struct DoxeInputField: View {
     var leftIcon: String?
     var rightIcon: String?
 
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             ZStack(alignment: .leading) {
                 HStack {
