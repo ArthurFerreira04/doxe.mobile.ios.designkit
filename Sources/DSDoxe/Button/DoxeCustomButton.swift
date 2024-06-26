@@ -19,6 +19,30 @@ public struct DoxeCustomButton: View {
     var isEnabled: Bool = true
     var isTransparent: Bool = false
 
+    public init(
+        text: String,
+        iconName: String? = nil,
+        action: @escaping () -> Void,
+        backgroundColor: Color,
+        borderColor: Color,
+        textColor: Color,
+        isFilled: Bool,
+        sizeStyle: ButtonSizeStyle,
+        isEnabled: Bool = true,
+        isTransparent: Bool = false
+    ) {
+        self.text = text
+        self.iconName = iconName
+        self.action = action
+        self.backgroundColor = backgroundColor
+        self.borderColor = borderColor
+        self.textColor = textColor
+        self.isFilled = isFilled
+        self.sizeStyle = sizeStyle
+        self.isEnabled = isEnabled
+        self.isTransparent = isTransparent
+    }
+
     public var body: some View {
         Button(action: action) {
             HStack {

@@ -24,6 +24,27 @@ public struct DoxeInputField: View {
     var errorMessage: String?
     var leftIcon: String?
     var rightIcon: String?
+    var rightIconAction: (() -> Void)?
+
+    public init(
+        state: Binding<DoxeInputFieldState>,
+        titleLabel: String,
+        placeholder: String,
+        supportingText: String,
+        errorMessage: String?,
+        leftIcon: String?,
+        rightIcon: String?,
+        rightIconAction: (() -> Void)? = nil
+    ) {
+        self._state = state
+        self.titleLabel = titleLabel
+        self.placeholder = placeholder
+        self.supportingText = supportingText
+        self.errorMessage = errorMessage
+        self.leftIcon = leftIcon
+        self.rightIcon = rightIcon
+        self.rightIconAction = rightIconAction
+    }
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -69,9 +90,13 @@ public struct DoxeInputField: View {
                     }
 
                     if let rightIcon = rightIcon {
-                        Image(systemName: rightIcon)
-                            .foregroundColor(.gray)
-                            .padding(.trailing, 8)
+                        Button(action: {
+                            rightIconAction?()
+                        }) {
+                            Image(systemName: rightIcon)
+                                .foregroundColor(.gray)
+                                .padding(.trailing, 8)
+                        }
                     }
                 }
                 .padding(.horizontal, 8)
