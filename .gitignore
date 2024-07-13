@@ -1,9 +1,32 @@
+# Diretórios derivados e de compilação
+.build/
+.xcodeproj/
+.swiftpm/
+
+# Arquivos de configuração
+Package.resolved
+
+# Arquivos de metadados do macOS
 .DS_Store
-/.build
-/Packages
-/*.xcodeproj
-xcuserdata/
+
+# Arquivos de log
+*.log
+
+# Diretórios temporários
+tmp/
+temp/
+
+# Arquivos de cache
+*.xcuserstate
+*.xcworkspace
+
+# Arquivos de playground
+timeline.xctimeline
+playground.xcworkspace
+
+# Arquivos gerados pelo Xcode
 DerivedData/
-.swiftpm/config/registries.json
-.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
-.netrc
+xcuserdata/
+
+# SwiftPM 
+.build/
