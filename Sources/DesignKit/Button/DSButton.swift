@@ -10,14 +10,14 @@ public struct DSButton: View {
     var action: () -> Void
 
     public init(
-        state: DSButtonState,
-        title: String, 
+        state: Binding<DSButtonState>,
+        title: String,
         iconName: String,
         style: DSButtonStyleType,
         size: DSButtonSize,
         action: @escaping () -> Void
     ) {
-        self.state = state
+        self._state = state
         self.title = title
         self.iconName = iconName
         self.style = style
@@ -41,12 +41,8 @@ public struct DSButton: View {
     }
 }
 
-struct DSButton_Previews: PreviewProvider {
-    static var previews: some View {
-        PreviewWrapper()
-    }
-
-    struct PreviewWrapper: View {
+#Preview {
+    struct Preview: View {
         @State private var buttonState: DSButtonState = .normal
 
         var body: some View {
@@ -60,4 +56,6 @@ struct DSButton_Previews: PreviewProvider {
             }
         }
     }
+
+    return Preview()
 }
