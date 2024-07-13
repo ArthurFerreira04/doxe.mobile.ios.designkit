@@ -9,6 +9,22 @@ public struct DSButton: View {
     var size: DSButtonSize
     var action: () -> Void
 
+    public init(
+        state: DSButtonState,
+        title: String, 
+        iconName: String,
+        style: DSButtonStyleType,
+        size: DSButtonSize,
+        action: @escaping () -> Void
+    ) {
+        self.state = state
+        self.title = title
+        self.iconName = iconName
+        self.style = style
+        self.size = size
+        self.action = action
+    }
+
     public var body: some View {
         Button(action: action) {
             Text(title)
