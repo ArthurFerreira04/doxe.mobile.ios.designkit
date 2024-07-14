@@ -75,7 +75,6 @@ final class DSButtonTests: XCTestCase {
     func testButtonStyleColors() {
         let normalState = DSButtonState.normal
         let disabledState = DSButtonState.disabled
-        let loadingState = DSButtonState.loading
 
         let normalStyle = DSButtonStyle(iconName: "test.icon", style: .filled, size: .medium, state: normalState)
         let disabledStyle = DSButtonStyle(iconName: "test.icon", style: .filled, size: .medium, state: disabledState)
