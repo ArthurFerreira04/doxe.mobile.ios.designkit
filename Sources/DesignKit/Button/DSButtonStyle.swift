@@ -24,7 +24,8 @@ public struct DSButtonStyle: ButtonStyle {
         }
         .padding(.horizontal, Spacing.medium)
         .padding(.vertical, Spacing.tiny)
-        .frame(width: state.isLoading ? loadingSize : .infinity, height: state.isLoading ? loadingSize : height())
+        .frame(width: state.isLoading ? loadingSize : nil, height: state.isLoading ? loadingSize : height())
+        .frame(maxWidth: .infinity)
         .background(background(isPressed: configuration.isPressed))
         .foregroundStyle(foregroundStyle())
         .clipShape(.rect(cornerRadius: cornerRadius()))

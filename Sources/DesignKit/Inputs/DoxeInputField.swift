@@ -1,10 +1,3 @@
-//
-//  SwiftUIView.swift
-//  
-//
-//  Created by Diego Lopes on 04/06/24.
-//
-
 import SwiftUI
 
 public enum DoxeInputFieldState {

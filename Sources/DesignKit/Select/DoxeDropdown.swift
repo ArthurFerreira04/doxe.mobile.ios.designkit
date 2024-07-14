@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Diego Lopes on 20/06/24.
-//
-
 import SwiftUI
 
 public enum DropdownState {
