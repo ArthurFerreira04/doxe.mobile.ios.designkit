@@ -33,7 +33,7 @@ public struct DSButtonStyle: ButtonStyle {
         .animation(.easeInOut(duration: 0.3), value: state)
     }
 
-    private func textColor() -> Color {
+    internal func textColor() -> Color {
         switch style {
         case .filled:
             return state.isDisabled ? .onDisabled : .onAccent
@@ -42,7 +42,7 @@ public struct DSButtonStyle: ButtonStyle {
         }
     }
 
-    private func iconColor() -> Color {
+    internal func iconColor() -> Color {
         switch style {
         case .filled:
             return state.isDisabled ? .onDisabled : .onAccent
@@ -51,7 +51,7 @@ public struct DSButtonStyle: ButtonStyle {
         }
     }
 
-    private func background(isPressed: Bool) -> Color {
+    internal func background(isPressed: Bool) -> Color {
         guard !state.isLoading else {
             return .surface
         }
@@ -64,7 +64,7 @@ public struct DSButtonStyle: ButtonStyle {
         }
     }
 
-    private func foregroundStyle() -> Color {
+    internal func foregroundStyle() -> Color {
         guard !state.isLoading else {
             return .onSurfaceHigh
         }
@@ -77,7 +77,7 @@ public struct DSButtonStyle: ButtonStyle {
         }
     }
 
-    private func border(isPressed: Bool) -> some View {
+    internal func border(isPressed: Bool) -> some View {
         guard !state.isLoading else {
             return RoundedRectangle(cornerRadius: cornerRadius())
                 .stroke(Color.clear, lineWidth: 0)
@@ -93,7 +93,7 @@ public struct DSButtonStyle: ButtonStyle {
         }
     }
 
-    private func cornerRadius() -> CGFloat {
+    internal func cornerRadius() -> CGFloat {
         guard !state.isLoading else {
             return loadingSize
         }
@@ -108,7 +108,7 @@ public struct DSButtonStyle: ButtonStyle {
         }
     }
 
-    private func height() -> CGFloat {
+    internal func height() -> CGFloat {
         switch size {
         case .small:
             return 30
