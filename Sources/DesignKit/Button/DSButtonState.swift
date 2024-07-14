@@ -8,4 +8,8 @@ public enum DSButtonState {
     var isDisabled: Bool {
         self == .disabled
     }
+
+    var isLoading: Bool {
+        self == .loading
+    }
 }

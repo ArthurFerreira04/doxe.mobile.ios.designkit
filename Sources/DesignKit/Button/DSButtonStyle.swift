@@ -1,41 +1,36 @@
 import SwiftUI
 
 public struct DSButtonStyle: ButtonStyle {
+    private let loadingSize = 50.0
+
     var iconName: String?
     var style: DSButtonStyleType
     var size: DSButtonSize
     var state: DSButtonState
 
     public func makeBody(configuration: Configuration) -> some View {
-        Group {
-            if state == .loading {
-                Circle()
-                    .fill(Color.surface)
-                    .frame(width: 50, height: 50)
-                    .overlay(
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: .accent))
-                    )
+        HStack(spacing: Spacing.medium) {
+            if state.isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .accent))
             } else {
-                HStack(spacing: Spacing.medium) {
-                    if let iconName {
-                        Image(systemName: iconName)
-                            .foregroundStyle(iconColor())
-                    }
-                    configuration.label
-                        .foregroundStyle(textColor())
+                if let iconName {
+                    Image(systemName: iconName)
+                        .foregroundStyle(iconColor())
                 }
-                .padding(.horizontal, Spacing.medium)
-                .padding(.vertical, Spacing.tiny)
-                .frame(height: height())
-                .background(background(isPressed: configuration.isPressed))
-                .foregroundStyle(foregroundStyle())
-                .clipShape(.rect(cornerRadius: cornerRadius()))
-                .overlay(border(isPressed: configuration.isPressed))
-                .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+                configuration.label
+                    .foregroundStyle(textColor())
             }
         }
-        .animation(.default, value: state)
+        .padding(.horizontal, Spacing.medium)
+        .padding(.vertical, Spacing.tiny)
+        .frame(width: state.isLoading ? loadingSize : .infinity, height: state.isLoading ? loadingSize : height())
+        .background(background(isPressed: configuration.isPressed))
+        .foregroundStyle(foregroundStyle())
+        .clipShape(.rect(cornerRadius: cornerRadius()))
+        .overlay(border(isPressed: configuration.isPressed))
+        .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+        .animation(.easeInOut(duration: 0.3), value: state)
     }
 
     private func textColor() -> Color {
@@ -57,6 +52,10 @@ public struct DSButtonStyle: ButtonStyle {
     }
 
     private func background(isPressed: Bool) -> Color {
+        guard !state.isLoading else {
+            return .surface
+        }
+
         switch style {
         case .filled:
             return state.isDisabled ? .disabled : (isPressed ? Color.accent.opacity(0.7) : Color.accent)
@@ -66,6 +65,10 @@ public struct DSButtonStyle: ButtonStyle {
     }
 
     private func foregroundStyle() -> Color {
+        guard !state.isLoading else {
+            return .onSurfaceHigh
+        }
+
         switch style {
         case .filled:
             return state.isDisabled ? .onDisabled : .onAccent
@@ -75,6 +78,11 @@ public struct DSButtonStyle: ButtonStyle {
     }
 
     private func border(isPressed: Bool) -> some View {
+        guard !state.isLoading else {
+            return RoundedRectangle(cornerRadius: cornerRadius())
+                .stroke(Color.clear, lineWidth: 0)
+        }
+
         switch style {
         case .outlined:
             return RoundedRectangle(cornerRadius: cornerRadius())
@@ -86,6 +94,10 @@ public struct DSButtonStyle: ButtonStyle {
     }
 
     private func cornerRadius() -> CGFloat {
+        guard !state.isLoading else {
+            return loadingSize
+        }
+
         switch size {
         case .small:
             return 8

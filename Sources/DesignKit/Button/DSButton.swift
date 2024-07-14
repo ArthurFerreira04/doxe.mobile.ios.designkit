@@ -48,11 +48,20 @@ public struct DSButton: View {
         var body: some View {
             DSButton(
                 state: $buttonState,
-                title: "Teste",
+                title: "Compartilhar",
                 iconName: "square.and.arrow.up",
-                style: .filled,
+                style: .outlined,
                 size: .large
             ) {
+                withAnimation {
+                    buttonState = .loading
+                }
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    withAnimation {
+                        buttonState = .normal
+                    }
+                }
             }
         }
     }
