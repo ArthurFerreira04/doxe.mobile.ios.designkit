@@ -4,7 +4,7 @@ public struct DSButton: View {
     @Binding var state: DSButtonState
 
     var title: String
-    var iconName: String
+    var iconName: String?
     var style: DSButtonStyleType
     var size: DSButtonSize
     var action: () -> Void
@@ -12,7 +12,7 @@ public struct DSButton: View {
     public init(
         state: Binding<DSButtonState>,
         title: String,
-        iconName: String,
+        iconName: String?,
         style: DSButtonStyleType,
         size: DSButtonSize,
         action: @escaping () -> Void
@@ -57,7 +57,7 @@ public struct DSButton: View {
                     buttonState = .loading
                 }
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                     withAnimation {
                         buttonState = .normal
                     }

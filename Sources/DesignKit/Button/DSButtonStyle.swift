@@ -11,8 +11,8 @@ public struct DSButtonStyle: ButtonStyle {
     public func makeBody(configuration: Configuration) -> some View {
         HStack(spacing: Spacing.medium) {
             if state.isLoading {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: .accent))
+                ArcsIndicatorView(count: 3, lineWidth: 2)
+                    .foregroundStyle(textColor())
             } else {
                 if let iconName {
                     Image(systemName: iconName)
@@ -24,13 +24,14 @@ public struct DSButtonStyle: ButtonStyle {
         }
         .padding(.horizontal, Spacing.medium)
         .padding(.vertical, Spacing.tiny)
+        .frame(maxWidth: state.isLoading ? loadingSize : .infinity)
         .frame(width: state.isLoading ? loadingSize : nil, height: state.isLoading ? loadingSize : height())
-        .frame(maxWidth: !state.isLoading ? .infinity : nil)
         .background(background(isPressed: configuration.isPressed))
         .foregroundStyle(foregroundStyle())
         .clipShape(.rect(cornerRadius: cornerRadius()))
         .overlay(border(isPressed: configuration.isPressed))
         .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+        .contentShape(Rectangle())
         .animation(.easeInOut(duration: 0.3), value: state)
     }
 
