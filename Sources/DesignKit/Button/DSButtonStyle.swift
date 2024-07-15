@@ -12,7 +12,7 @@ public struct DSButtonStyle: ButtonStyle {
         HStack(spacing: Spacing.medium) {
             if state.isLoading {
                 ArcsIndicatorView(count: 3, lineWidth: 2)
-                    .foregroundStyle(textColor())
+                    .foregroundStyle(Color.accent)
             } else {
                 if let iconName {
                     Image(systemName: iconName)
