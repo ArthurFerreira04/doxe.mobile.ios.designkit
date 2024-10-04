@@ -2,7 +2,7 @@ import Foundation
 
 public struct Spacing {
     /// Single unit spacing (1 pt)
-    static let single: CGFloat = 1
+    public static let single: CGFloat = 1
 
     /// Double unit spacing (2 pt)
     static let double: CGFloat = 2
